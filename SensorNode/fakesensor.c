@@ -2,11 +2,17 @@
 
 double generate_data()
 {
-    
+
+    int x = 0;
+
+    double values[360];
+
     do
     {
-        val = sin(x)
-    } while ();
+        values[x] = sin(x)
+        x++;
+    } while (x < 360);
 
+    return values;
 
 }

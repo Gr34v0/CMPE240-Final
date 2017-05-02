@@ -6,22 +6,13 @@
 #include <netinet/in.h> /* struct sockaddr_in, struct sockaddr */
 #include <netdb.h> /* struct hostent, gethostbyname */
 
-void network_setup()
+int network_setup(char host, int portno)
 {
-    /* first what are we going to send and where are we going to send it? */
-    int portno =        80;
-    char *host =        argv[1]; //Must be IP address of host
-    char *message_fmt = "POST %s";//String is meant to be the data we're sending
 
     struct hostent *server;
     struct sockaddr_in serv_addr;
-    int sockfd, bytes, sent, received, total;
-    char message[1024],response[4096];
 
-    if (argc < 3) { puts("Parameters: <target ip address>"); }
-
-    /* fill in the parameters */
-    printf("Request: %s\n",message);
+    int bytes, sent, total;
 
     /* create the socket */
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -42,6 +33,7 @@ void network_setup()
     if (connect(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0)
         error("ERROR connecting");
 
+    return sockfd;
 }
 
 void network_send(char message, int sockfd)
@@ -58,9 +50,9 @@ void network_send(char message, int sockfd)
         sent+=bytes;
     } while (sent < total);
 
-    /* close the socket */
-    close(sockfd);
+}
 
-    /* process response */
-    printf("Response:\n%s\n",response);
+void network_close(int sockfd)
+{
+    close(sockfd);
 }

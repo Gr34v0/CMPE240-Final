@@ -1,0 +1,2 @@
+
+double generate_data();

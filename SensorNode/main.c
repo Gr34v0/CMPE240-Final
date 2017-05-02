@@ -1,4 +1,4 @@
-#include <stdio.h> /* printf, sprintf */
+#include <stdio.h> /* printf, sprf */
 #include <stdlib.h> /* exit */
 #include <unistd.h> /* read, write, close */
 #include <string.h> /* memcpy, memset */
@@ -12,19 +12,18 @@ int main(int argc,char *argv[])
 {
     /* first what are we going to send and where are we going to send it? */
     int portno =        80;
-    char *host =        "api.somesite.com"; //Must change this to be the IP Address of the 2nd RPi hosting the server.
-    char *message_fmt = "POST /apikey=%s&command=%s HTTP/1.0\r\n\r\n";
+    char *host =        argv[1]; //Must change this to be the IP Address of the 2nd RPi hosting the server.
+    char *message_fmt = "POST %s";//String is meant to be the data we're sending
 
     struct hostent *server;
     struct sockaddr_in serv_addr;
     int sockfd, bytes, sent, received, total;
     char message[1024],response[4096];
 
-    if (argc < 3) { puts("Parameters: <apikey> <command>"); exit(0); }
+    if (argc < 3) { puts("Parameters: <target ip address>"); }
 
     /* fill in the parameters */
-    sprintf(message,message_fmt,argv[1],argv[2]);
-    printf("Request:\n%s\n",message);
+    printf("Request: %s\n",message);
 
     /* create the socket */
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -32,6 +31,7 @@ int main(int argc,char *argv[])
 
     /* lookup the ip address */
     server = gethostbyname(host);
+    printf("%s", server->h_addr);
     if (server == NULL) error("ERROR, no such host");
 
     /* fill in the structure */

@@ -17,7 +17,7 @@ int main(int argc,char *argv[])
     int sockfd;
     char message[1024],response[4096];
     double values[360];
-    bool sendable = false;
+    int sendable = 0;
 
     if (argc < 2) { puts("Parameters: <target ip address>"); }
 
@@ -27,7 +27,7 @@ int main(int argc,char *argv[])
     printf("Request: %s\n",message);
 
     //Start network connection
-    sockfd = network_setup(message, host, portno, *sockfd);
+    sockfd = network_setup(portno, *sockfd);
 
     // Collect data...
     pthread_t tid;

@@ -9,5 +9,5 @@ void collect_data()
     {
         generate_data(x, values, sendable);
         x++
-    } while( sendable != true);
+    } while(!sendable);
 }

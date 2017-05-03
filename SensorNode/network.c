@@ -6,7 +6,7 @@
 #include <netinet/in.h> /* struct sockaddr_in, struct sockaddr */
 #include <netdb.h> /* struct hostent, gethostbyname */
 
-int network_setup(char host, int portno)
+int network_setup(char* host, int portno)
 {
 
     struct hostent *server;

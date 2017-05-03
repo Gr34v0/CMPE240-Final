@@ -27,7 +27,7 @@ int main(int argc,char *argv[])
     printf("Request: %s\n",message);
 
     //Start network connection
-    sockfd = network_setup(host, portno);
+    sockfd = network_setup(*host, portno);
 
     // Collect data...
     pthread_t tid;
@@ -37,7 +37,7 @@ int main(int argc,char *argv[])
 
         if()
         {
-            
+
         }
 
         // Send data

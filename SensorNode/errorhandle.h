@@ -1,0 +1,3 @@
+
+
+void error(char* errorMessage);

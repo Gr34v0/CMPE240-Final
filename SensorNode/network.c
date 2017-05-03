@@ -7,13 +7,13 @@
 #include <netdb.h> /* struct hostent, gethostbyname */
 #include "network.h"
 
-int network_setup(char* host, int portno)
+int bytes, sent, total; //I know, I know... Ew. Whatever
+
+int network_setup(char* host, int portno, int sockfd)
 {
 
     struct hostent *server;
     struct sockaddr_in serv_addr;
-
-    int bytes, sent, total;
 
     /* create the socket */
     sockfd = socket(AF_INET, SOCK_STREAM, 0);

@@ -36,7 +36,7 @@ int network_setup(char host, int portno)
     return sockfd;
 }
 
-void network_send(char message, int sockfd)
+void network_send(char* message, int sockfd)
 {
     /* send the request */
     total = strlen(message);

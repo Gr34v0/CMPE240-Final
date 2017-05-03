@@ -1,6 +1,6 @@
 #include "fakesensor.h"
 
-void collect_data()
+void collect_data(double* values, int sendable)
 {
 
     int x = 0;
@@ -8,6 +8,6 @@ void collect_data()
     do
     {
         generate_data(x, values, sendable);
-        x++
+        x++;
     } while(!sendable);
 }

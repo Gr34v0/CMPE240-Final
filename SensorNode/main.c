@@ -27,7 +27,7 @@ int main(int argc,char *argv[])
     printf("Request: %s\n",message);
 
     //Start network connection
-    sockfd = network_setup(*host, portno);
+    sockfd = network_setup(host, portno);
 
     // Collect data...
     pthread_t tid;
@@ -35,19 +35,19 @@ int main(int argc,char *argv[])
 
     while(1){
 
-        if()
+        if(1 == 1)
         {
-
+            collect_data(values, sendable);
         }
 
         // Send data
-        network_send(message, sockfd);
+        //network_send(message, sockfd);
 
     }
     // Close the network socket
     network_close(sockfd);
 
-    pthread_exit(NULL);
+    //pthread_exit(NULL);
 
     return 0;
 }

@@ -4,7 +4,7 @@
 #include <string.h> /* memcpy, memset */
 #include <pthread.h>
 #include "network.h"
-#include "sensor.h"
+#include "sensorinterface.h"
 
 void error(const char *msg) { perror(msg); exit(0); }
 

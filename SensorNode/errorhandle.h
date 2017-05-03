@@ -1,3 +1,3 @@
 
 
-void error(char* errorMessage);
+void error_handle(char* errorMessage);

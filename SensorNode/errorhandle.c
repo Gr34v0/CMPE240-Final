@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 
-void error(char* errorMessage)
+void error_handle(char* errorMessage)
 {
     printf("%s", errorMessage);
 }

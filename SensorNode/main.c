@@ -4,7 +4,7 @@
 #include <string.h> /* memcpy, memset */
 #include <pthread.h>
 #include "network.h"
-#include "fakesensor.h"
+#include "sensor.h"
 
 void error(const char *msg) { perror(msg); exit(0); }
 
@@ -16,6 +16,8 @@ int main(int argc,char *argv[])
     char *message_fmt = "POST %s"; //String is meant to be the data we're sending
     int sockfd;
     char message[1024],response[4096];
+    double values[360];
+    bool sendable = false;
 
     if (argc < 2) { puts("Parameters: <target ip address>"); }
 
@@ -24,22 +26,25 @@ int main(int argc,char *argv[])
     /* fill in the parameters */
     printf("Request: %s\n",message);
 
-
     //Start network connection
     sockfd = network_setup(message, host, portno, *sockfd);
 
     // Collect data...
     pthread_t tid;
-    int i = 0;
+    //pthread_create(&tid, NULL, collect_data, NULL);
 
-    pthread_create(&tid, NULL, generate_data, NULL);
+    while(1){
 
-    // Send data
-    network_send(message, sockfd);
+        if()
 
+        // Send data
+        network_send(message, sockfd);
 
+    }
     // Close the network socket
     network_close(sockfd);
+
+    pthread_exit(NULL);
 
     return 0;
 }

@@ -1,18 +1,10 @@
 #include <math.h>
 
-double generate_data()
+void generate_data(int x, double* values, bool sendable)
 {
-
-    int x = 0;
-
-    double values[360];
-
-    do
+    values[x] = sin(x)
+    if(x == 359)
     {
-        values[x] = sin(x)
-        x++;
-    } while (x < 360);
-
-    return values;
-
+        sendable = true;
+    }
 }

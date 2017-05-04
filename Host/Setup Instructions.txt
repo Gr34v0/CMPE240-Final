@@ -1,0 +1,28 @@
+Guides this information was taken from: 
+http://www.instructables.com/id/Turning-your-Raspberry-Pi-into-a-personal-web-serv/
+http://www.instructables.com/id/Host-your-website-on-Raspberry-pi/
+https://pimylifeup.com/raspberry-pi-mysql-phpmyadmin/
+
+This guide assumes that the Raspberry Pi has Raspbian installed on it already.
+The first step is to install the apache server. This is done by using the following command.
+"sudo apt-get install apache2 php5 libapache2-mod-php5"
+Then you need to allow for overrides by changing "AllowOverride None" to "AllowOverride ALL" in the file located at "sudo nano /etc/apache2/sites-enabled/000-default".
+Restart the server. "sudo service apache2 restart"
+The files for your site are located under "/var/www". We need to change the permissions so run the following commands.
+"cd /var/
+sudo chmod 777 /www"
+
+This will allow use to update the web files using WinSCP if we want.
+
+Then we want to install the mysql server. "sudo apt-get install mysql-server mysql-client php5-mysql"
+You will need to set a password for the MYSQL root user. Make sure to remember it.
+In order to better monitor the DB we used PHPMyAdmin.
+Run "sudo apt-get install phpmyadmin". Follow the intructions until it is done.
+We will also need to setup Apache to include our PHPMyAdmin installation.
+Enter "sudo nano /etc/apache2/apache2.conf"
+Add "Include /etc/phpmyadmin/apache.conf" to the bottom.
+Save and exit.
+Restart Apache "sudo /etc/init.d/apache2 restart"
+
+To find out where your website is use "ifconfig" and find the IP Address. That IP is what you will use to get to the site.
+To get to the PHPMyAdmin go to "IP_ADDRESS/phpmyadmin"

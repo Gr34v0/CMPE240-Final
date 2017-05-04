@@ -12,11 +12,6 @@ int main(int argc,char *argv[])
         debug_msg("#IF: Debugging initialized\n");
     #endif
 
-    if(debug)
-    {
-        debug_msg("IF: Debugging initialized\n");
-    }
-
 
     int portno =        80;
     char *host =        argv[1]; //Must be IP address of host
@@ -37,13 +32,15 @@ int main(int argc,char *argv[])
     /* fill in the parameters */
     //printf("Request: %s\n\n", message);
 
-    //Start network connection
-    sockfd = network_setup(host, portno, sockfd);
-
-    // Collect data...
-    pthread_t tid;
+    //Start network connection 
+    #if !nonetwork
+        sockfd = network_setup(host, portno, sockfd);
+    #endif
+    
+    //pthread_t tid;
     //pthread_create(&tid, NULL, collect_data, NULL);
 
+    // Collect data...
     while(1){
 
         #if debug
@@ -56,14 +53,17 @@ int main(int argc,char *argv[])
         //}
 
         #if debug
-            debug_msg("Sendable = %d\n", sendable);
+            printf("Sendable: %d\n", sendable);
         #endif
         // Send data
         //network_send(message, sockfd);
 
     }
     // Close the network socket
-    network_close(sockfd);
+    #if !nonetwork
+        network_close(sockfd);
+    #endif
+
     #if debug
             debug_msg("Network Socket Closed\n");
     #endif

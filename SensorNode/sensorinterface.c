@@ -11,7 +11,7 @@ void collect_data(double* values, int sendable)
 
     do
     {
-        generate_data(x, values, sendable);
+        generate_data(&x, values, sendable);
         x++;
     } while(!sendable);
 }

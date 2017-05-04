@@ -3,8 +3,6 @@
 
 #include "errorhandle.h"
 
-int debug = 1;
-
 void error_handle(char* errorMessage)
 {
     perror(errorMessage); 

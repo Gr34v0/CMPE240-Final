@@ -1,5 +1,9 @@
 
-extern int debug; //1 = debugmode. 0 = normal mode
+//extern int debug; //1 = debugmode. 0 = normal mode
+
+#define debug 1
+
+#define nonetwork 1
 
 void error_handle(char* errorMessage);
 

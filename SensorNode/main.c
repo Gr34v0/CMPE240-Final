@@ -57,7 +57,10 @@ int main(int argc,char *argv[])
                 printf("Sendable: %d\n", sendable);
             #endif
 
-            for(int x = 0; x < 360; x++){
+            int x;
+
+            for(x = 0; x < 360; x++)
+            {
                 sprintf(&message[x*7], "%1.6f", values[x]);
             }
 
@@ -80,7 +83,7 @@ int main(int argc,char *argv[])
     #endif
 
     #if debug
-            debug_msg("Network Socket Closed\n");
+        debug_msg("Network Socket Closed\n");
     #endif
 
     //pthread_exit(NULL);

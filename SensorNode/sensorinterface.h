@@ -1,2 +1,2 @@
 
-void collect_data(double* values, int sendable);
+void collect_data(double* values, int* sendable);

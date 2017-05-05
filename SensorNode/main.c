@@ -1,5 +1,5 @@
 #include <stdio.h> /* printf, sprf */
-#include <unistd.h> /* read, write, close */
+#include <unistd.h> /* read, write, close, sleep */
 #include <string.h> /* memcpy, memset */
 #include <pthread.h>
 #include "network.h"
@@ -17,9 +17,9 @@ int main(int argc,char *argv[])
     char *host =        argv[1]; //Must be IP address of host
     char *message_fmt = "POST %s"; //String is meant to be the data we're sending
     int sockfd;
-    char message[1024], response[4096];
+    char message[3072];
+    char response[4096];
     double values[360];
-    int sendable = 0;
 
     if (argc < 2) 
     { 
@@ -43,22 +43,37 @@ int main(int argc,char *argv[])
     // Collect data...
     while(1){
 
-        #if debug
-            debug_msg("Start While Loop\n");
-        #endif
+        int sendable = 0;
 
-        //if()
-        //{
-            collect_data(values, sendable);
-        //}
+        while(!sendable){
+
+            #if debug
+                debug_msg("Start While Loop\n");
+            #endif
+
+            collect_data(values, &sendable);
+
+            #if debug
+                printf("Sendable: %d\n", sendable);
+            #endif
+
+            for(int x = 0; x < 360; x++){
+                sprintf(&message[x*7], "%1.6f", values[x]);
+            }
+
+        }
 
         #if debug
-            printf("Sendable: %d\n", sendable);
+            debug_msg("Sleeping or 5 Seconds\n");
         #endif
+        sleep(5);
+
         // Send data
-        //network_send(message, sockfd);
-
+        #if !nonetwork
+            network_send(message, sockfd);
+        #endif
     }
+
     // Close the network socket
     #if !nonetwork
         network_close(sockfd);

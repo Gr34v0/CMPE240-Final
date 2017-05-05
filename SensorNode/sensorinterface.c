@@ -1,7 +1,7 @@
 #include "fakesensor.h"
 #include "errorhandle.h"
 
-void collect_data(double* values, int sendable)
+void collect_data(double* values, int* sendable)
 {
     #if debug
             debug_msg("collect_data initialized\n");
@@ -11,7 +11,10 @@ void collect_data(double* values, int sendable)
 
     do
     {
+        #if debug
+            debug_msg("Calling generate_data\n");
+        #endif
         generate_data(&x, values, sendable);
         x++;
-    } while(!sendable);
+    } while(!*sendable);
 }

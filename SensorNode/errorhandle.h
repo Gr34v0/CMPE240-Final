@@ -3,7 +3,7 @@
 
 #define debug 1
 
-#define nonetwork 1
+#define nonetwork 0
 
 void error_handle(char* errorMessage);
 

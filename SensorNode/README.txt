@@ -1,6 +1,17 @@
 Using standard C libraries and GCC to compile.
 
 **INSTALLATION**
+
+To disable Debug mode: in errorhandle.h, change the line
+    #define debug 1
+to 
+    #define debug 0
+
+To disable No-Network mode: in errorhandler.h, change the line
+    #define nonetwork 1
+to 
+    #define nonetwork 0
+
 To complile on...
 
 Cygwin:           $gcc -o SensorNode *.c

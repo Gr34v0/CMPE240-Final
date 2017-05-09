@@ -58,7 +58,7 @@ void network_send(char* message, int sockfd)
     total = strlen(message);
     sent = 0;
     #if debug
-        debug_msg("Start network_send While Loop\n")
+        debug_msg("Start network_send While Loop\n");
     #endif
     do {
         bytes = write(sockfd,message+sent,total-sent);
@@ -70,9 +70,9 @@ void network_send(char* message, int sockfd)
     } while (sent < total);
 
     #if debug
-        debug_msg("Sent complete\n")
+        debug_msg("Sent complete\n");
     #endif
-    
+
 }
 
 void network_close(int sockfd)

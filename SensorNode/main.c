@@ -13,7 +13,7 @@ int main(int argc,char *argv[])
     #endif
 
 
-    int portno =        argv[2];
+    int portno =        8081;//argv[2];
     char *host =        argv[1]; //Must be IP address of host
     char *message_fmt = "POST %s"; //String is meant to be the data we're sending
     int sockfd;

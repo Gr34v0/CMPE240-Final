@@ -84,10 +84,10 @@ int main(int argc, char *argv[])
         #endif
         sleep(5);
 
-        while ( sizeof(values)/sizeof(values[0]) > 0)
-        {
+        //while ( sizeof(values)/sizeof(values[0]) > 0)
+        //{
             //sprintf(message, )
-        }
+        //}
 
         // Send data
         #if !nonetwork

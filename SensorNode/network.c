@@ -86,12 +86,12 @@ void network_send(char* message, int sockfd)
     #endif
 }
 
-void network_recieve(char* message, int sockfd)
+void network_recieve(char* response, int sockfd)
 {
     /* receive the response */
     memset(response,0,sizeof(response));
     total = sizeof(response)-1;
-    received = 0;
+    int received = 0;
     do {
         bytes = read(sockfd,response+received,total-received);
         if (bytes < 0)

@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     char response[4096];
     double values[360];
 
-    sprintf(message, message_fmt);
+    //sprintf(message, message_fmt);
 
     printf("IP Address = %s\n\n", host);
 

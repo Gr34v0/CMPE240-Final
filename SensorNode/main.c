@@ -15,7 +15,7 @@ int main(int argc,char *argv[])
 
     int portno =        8081;//argv[2];
     char *host =        argv[1]; //Must be IP address of host
-    char *message_fmt = "POST %s"; //String is meant to be the data we're sending
+    char *message_fmt = "POST %s HTTP/1.0\r\n\r\n"; //String is meant to be the data we're sending
     int sockfd;
     char message[3072];
     char response[4096];
@@ -26,6 +26,8 @@ int main(int argc,char *argv[])
         printf("Parameters: <target ip address>\n");
         return 1;
     }
+
+    sprinf(message, message_fmt);
 
     printf("IP Address = %s\n\n", host);
 
@@ -70,6 +72,11 @@ int main(int argc,char *argv[])
             debug_msg("Sleeping or 5 Seconds\n");
         #endif
         sleep(5);
+
+        while (len(values) > 0)
+        {
+            sprintf(message, )
+        }
 
         // Send data
         #if !nonetwork

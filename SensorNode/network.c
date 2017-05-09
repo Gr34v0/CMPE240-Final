@@ -51,17 +51,29 @@ int network_setup(char* host, int portno, int sockfd)
 
 void network_send(char* message, int sockfd)
 {
+
+    
     #if debug
         debug_msg("Initialize network_send\n");
     #endif
-    /* send the request */
+    // send the request 
     total = strlen(message);
     sent = 0;
     #if debug
         debug_msg("Start network_send While Loop\n");
     #endif
     do {
-        bytes = write(sockfd,message+sent,total-sent);
+
+        #if debug
+            debug_msg("Wrote to sockfd\n");
+        #endif
+
+        bytes = write(sockfd,message+sent,total-sent); 
+
+        #if debug
+            debug_msg("Start network_send While Loop\n");
+        #endif
+
         if (bytes < 0)
             error_handle("ERROR writing message to socket\n");
         if (bytes == 0)
@@ -72,7 +84,6 @@ void network_send(char* message, int sockfd)
     #if debug
         debug_msg("Sent complete\n");
     #endif
-
 }
 
 void network_close(int sockfd)

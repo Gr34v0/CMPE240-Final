@@ -21,7 +21,7 @@ int main(int argc,char *argv[])
     char response[4096];
     double values[360];
 
-    if (argc < 3) 
+    if (argc < 2) 
     { 
         printf("Parameters: <target ip address>\n");
         return 1;

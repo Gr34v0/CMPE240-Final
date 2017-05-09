@@ -6,7 +6,6 @@ def main():
 
     base_url = "http://www.google.com"
     portno = 8081
-    # final_url="/{0}/friendly/{1}/url".format(base_url,any_value_here)
 
     params = {}
     payload = {'number': 2, 'value': 1}

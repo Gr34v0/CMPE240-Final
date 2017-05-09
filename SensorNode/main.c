@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     }
 
     char *host =        argv[1]; //Must be IP address of host
-    char *message_fmt = "POST %s HTTP/1.0\r\n\r\n"; //String is meant to be the data we're sending
+    char *message_fmt = "POST %f"; //String is meant to be the data we're sending
     int sockfd;
     char message[3072];
     char response[4096];
@@ -72,26 +72,33 @@ int main(int argc, char *argv[])
 
             int x;
 
-            for(x = 5; x < 365; x++)
-            {
-                sprintf(&message[x*7], "%1.6f", values[x-5]);
-            }
+            //for(x = 0; x < 360; x++)
+            //{
+            //    printf(&message[x*7], "%1.6f", values[x]);
+            //}
 
         }
 
+
         #if debug
-            debug_msg("Sleeping or 5 Seconds\n");
+            debug_msg("Sleeping or 1 Seconds\n");
         #endif
-        sleep(5);
+        sleep(1);
 
         //while ( sizeof(values)/sizeof(values[0]) > 0)
         //{
-            //sprintf(message, )
+            //sprintf(message, " HTTP/1.0\r\n\r\n");
         //}
 
         // Send data
         #if !nonetwork
+        int val = 0;
+        while(val < 360)
+        {
+            sprintf(message, message_fmt, values[val]);
+            printf("%s\n", message);
             network_send(message, sockfd);
+        }
         #endif
     }
 

@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     }
 
     char *host =        argv[1]; //Must be IP address of host
-    char *message_fmt = "POST %f"; //String is meant to be the data we're sending
+    char *message_fmt = "POST %f HTTP/1.0\r\n\r\n"; //String is meant to be the data we're sending
     int sockfd;
     char message[3072];
     char response[4096];

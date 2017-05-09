@@ -29,7 +29,7 @@ int network_setup(char* host, int portno, int sockfd)
 
     /* lookup the ip address */
     server = gethostbyname(host);
-    printf("%s", server->h_addr);
+    printf("%s\n", server->h_addr);
     if (server == NULL) error_handle("ERROR, no such host\n");
 
     /* fill in the structure */

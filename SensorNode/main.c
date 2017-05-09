@@ -2,24 +2,17 @@
 #include <unistd.h> /* read, write, close, sleep */
 #include <string.h> /* memcpy, memset */
 #include <pthread.h>
+#include <stdlib.h>
+
 #include "network.h"
 #include "sensorinterface.h"
 #include "errorhandle.h"
 
-int main(int argc,char *argv[])
+int main(int argc, char *argv[])
 {   
     #if debug == 1
         debug_msg("#IF: Debugging initialized\n");
     #endif
-
-
-    int portno =        8081;//argv[2];
-    char *host =        argv[1]; //Must be IP address of host
-    char *message_fmt = "POST %s HTTP/1.0\r\n\r\n"; //String is meant to be the data we're sending
-    int sockfd;
-    char message[3072];
-    char response[4096];
-    double values[360];
 
     if (argc < 2) 
     { 
@@ -27,7 +20,25 @@ int main(int argc,char *argv[])
         return 1;
     }
 
-    sprinf(message, message_fmt);
+    int portno;
+
+    if( argc < 3)
+    {
+        portno =       80;
+    }
+    else
+    {
+        portno =       atoi(argv[2]);
+    }
+
+    char *host =        argv[1]; //Must be IP address of host
+    char *message_fmt = "POST %s HTTP/1.0\r\n\r\n"; //String is meant to be the data we're sending
+    int sockfd;
+    char message[3072];
+    char response[4096];
+    double values[360];
+
+    sprintf(message, message_fmt);
 
     printf("IP Address = %s\n\n", host);
 
@@ -61,9 +72,9 @@ int main(int argc,char *argv[])
 
             int x;
 
-            for(x = 0; x < 360; x++)
+            for(x = 5; x < 365; x++)
             {
-                sprintf(&message[x*7], "%1.6f", values[x]);
+                sprintf(&message[x*7], "%1.6f", values[x-5]);
             }
 
         }
@@ -73,9 +84,9 @@ int main(int argc,char *argv[])
         #endif
         sleep(5);
 
-        while (len(values) > 0)
+        while ( sizeof(values)/sizeof(values[0]) > 0)
         {
-            sprintf(message, )
+            //sprintf(message, )
         }
 
         // Send data

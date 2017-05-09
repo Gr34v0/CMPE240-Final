@@ -13,7 +13,7 @@ int main(int argc,char *argv[])
     #endif
 
 
-    int portno =        80;
+    int portno =        argv[2];
     char *host =        argv[1]; //Must be IP address of host
     char *message_fmt = "POST %s"; //String is meant to be the data we're sending
     int sockfd;
@@ -21,7 +21,7 @@ int main(int argc,char *argv[])
     char response[4096];
     double values[360];
 
-    if (argc < 2) 
+    if (argc < 3) 
     { 
         printf("Parameters: <target ip address>\n");
         return 1;

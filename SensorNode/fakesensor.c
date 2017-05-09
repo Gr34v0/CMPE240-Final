@@ -8,7 +8,7 @@ void generate_data(int* x, double* values, int* sendable)
     values[*x] = sin((double)*x);
 
     #if debug
-        printf("%d: %f\n", *x,  values[*x]);
+        //printf("%d: %f\n", *x,  values[*x]);
     #endif
 
     if(*x == 359)

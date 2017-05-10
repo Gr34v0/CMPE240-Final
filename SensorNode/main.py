@@ -1,11 +1,14 @@
 import requests
 import FakeSensor
 import json
-
+import sys
 
 def main():
-
-    base_url = "http://129.21.207.229:8081"
+    if( len(sys.argv) > 2 or len(sys.argv) < 2):
+        print "Parameters: <IP Address or URL to HOST server\n"
+        return
+    else:
+        base_url = sys.argv[1]
 
     value = 0
 

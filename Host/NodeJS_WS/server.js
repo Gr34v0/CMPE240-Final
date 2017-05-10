@@ -14,6 +14,7 @@ server = http.createServer( function(req, res) {
 
     console.dir(req.param);
 
+	//If a POST occurs.
     if (req.method == 'POST') {
         console.log("POST");
         var body = '';
@@ -28,13 +29,20 @@ server = http.createServer( function(req, res) {
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.end('post received');
     }
+    //If a GET occurs.
     else
     {
         console.log("GET");
         //var html = '<html><body><form method="post" action="http://localhost:3000">Name: <input type="text" name="name" /><input type="submit" value="Submit" /></form></body>';
         var html = fs.readFileSync('index.html');
+	var db = getAllDB();
+	    console.log(db);
         res.writeHead(200, {'Content-Type': 'text/html'});
-        res.end(html);
+        res.write(html + "<h1>CMPE-240 Final Project - SensorNode</h1>");
+        res.write("<p>"+ db + "</p>");
+        res.write("</body>");
+        res.write("</html>");
+        res.end();
     }
 
 });
@@ -54,11 +62,9 @@ function writeToDB(msg) {
 function getAllDB(){
     connection.query("SELECT * FROM data", function (err, rows, fields) {
         if (!err) {
-            rows = JSON.stringify(rows);
-            wss.clients.forEach(function each(client) {
-                client.send(rows);
-                console.log('Sent: ' + rows);
-            });
+		rows = JSON.stringify(rows);
+		console.log(rows);
+		return rows;
         }
         else {
             console.log('Error while performing Query.');

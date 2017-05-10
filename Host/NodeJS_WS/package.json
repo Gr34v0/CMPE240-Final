@@ -1,12 +1,11 @@
 {
   "name": "Host",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.html",
   "author": "Adam Audycki",
   "description": "",
   "dependencies": {
     "express": "^4.13.4",
-    "ws": "^1.1.0",
     "mysql": "^2.5.4"
   }
 }

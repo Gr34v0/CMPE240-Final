@@ -1,10 +1,5 @@
-var http = require('http');
-var express = require('express');
-var WSS = require('ws').Server;
-
-var app = express().use(express.static('Client'));
-var server = http.createServer(app);
-server.listen(8080, '127.0.0.1');
+http = require('http');
+fs = require('fs');
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -14,39 +9,43 @@ var connection = mysql.createConnection({
     database: 'cmpe'
 });
 
-var wss = new WSS({port: 8081});
-//Does some stuff when connection is established.
-wss.on('connection', function (socket) {
-    console.log('Opened Connection ');
 
-    var json = JSON.stringify({message: 'Gotcha'});
-    socket.send(json);
-    console.log('Sent: ' + json);
+server = http.createServer( function(req, res) {
 
-    socket.on('message', function (message) {
-        console.log('Received: ' + message);
-        writeToDB(message);
+    console.dir(req.param);
 
-    });
-
-    socket.on('close', function () {
-        console.log('Closed Connection ');
-    });
+	//If a POST occurs.
+    if (req.method == 'POST') {
+        console.log("POST");
+        var body = '';
+        req.on('data', function (data) {
+            body += data;
+            console.log("Partial body: " + body);
+        });
+        req.on('end', function () {
+            console.log("Body: " + body);
+		writeToDB(body);
+        });
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end('post received');
+    }
+    //If a GET occurs.
+    else
+    {
+        console.log("GET");
+        //var html = '<html><body><form method="post" action="http://localhost:3000">Name: <input type="text" name="name" /><input type="submit" value="Submit" /></form></body>';
+        var html = fs.readFileSync('index.html');
+	var db = getAllDB();
+	    console.log(db);
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write(html + "<h1>CMPE-240 Final Project - SensorNode</h1>");
+        res.write("<p>"+ db + "</p>");
+        res.write("</body>");
+        res.write("</html>");
+        res.end();
+    }
 
 });
-
-//function that will send messages to the client side.
-var broadcast = function () {
-    var json = JSON.stringify({
-        message: 'Hello!'
-    });
-
-    wss.clients.forEach(function each(client) {
-        client.send(json);
-        console.log('Sent: ' + json);
-    });
-}
-setInterval(broadcast, 3000);
 
 //The function will write the message into the database.
 function writeToDB(msg) {
@@ -63,14 +62,17 @@ function writeToDB(msg) {
 function getAllDB(){
     connection.query("SELECT * FROM data", function (err, rows, fields) {
         if (!err) {
-            rows = JSON.stringify(rows);
-            wss.clients.forEach(function each(client) {
-                client.send(rows);
-                console.log('Sent: ' + rows);
-            });
+		rows = JSON.stringify(rows);
+		console.log(rows);
+		return rows;
         }
         else {
             console.log('Error while performing Query.');
         }
     });
 }
+
+port = 8081;
+host = '127.0.0.1';
+server.listen(port, host);
+console.log('Listening at http://' + host + ':' + port);

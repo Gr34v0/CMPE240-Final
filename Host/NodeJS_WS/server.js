@@ -39,7 +39,9 @@ server = http.createServer( function(req, res) {
 	    console.log(db);
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.write(html + "<h1>CMPE-240 Final Project - SensorNode</h1>");
-        res.write("<p>"+ db + "</p>");
+        res.write("<div id='vis'></div>");
+        res.write("<script src='http://d3js.org/d3.v2.min.js'</script>");
+        res.write("<script src=sine.js></script>");
         res.write("</body>");
         res.write("</html>");
         res.end();

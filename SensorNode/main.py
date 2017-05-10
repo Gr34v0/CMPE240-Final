@@ -29,7 +29,7 @@ def main():
         data_parcel = json.dumps(({index_value: value}), separators=(",", ":"))
 
         #  Calling post from the requests package to send our JSON data to the URL
-        response = requests.post(url, params=None, data=json.dumps(data_parcel, separators=(",", ":")))
+        response = requests.post(url, params=None, data=data_parcel)
 
         #  Incrementing index value so the next pass will provide a new key to the dict
         index_value += 1

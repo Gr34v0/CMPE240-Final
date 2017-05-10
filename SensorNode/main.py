@@ -1,18 +1,26 @@
 import requests
+import FakeSensor
+import json
+
 
 def main():
 
-    base_url = "http://localhost:8081"
-    portno = 8081
+    base_url = "http://129.21.207.229:8081"
 
-    params = {}
-    payload = {'number': 2, 'value': 1}
-    response = requests.post(base_url, params=params, data=payload)
-    #response = requests.get(base_url, params=None)
+    value = 0
 
-    print(response.text) #TEXT/HTML
-    print(response.status_code, response.reason) #HTTP
-    print(response.raw.version)
+    indexValue = 0
+
+    while(True):
+        value = FakeSensor.collect_data(indexValue)
+
+        response = requests.post(base_url, params=None, data=json.dumps(value, separators=(",",":")))
+
+        indexValue+=1
+
+        print(response.text)  # TEXT/HTML
+        print(response.status_code, response.reason)  # HTTP
+        print(response.raw.version)
 
 
 main()

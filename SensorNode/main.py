@@ -2,9 +2,8 @@ import requests
 
 
 def main():
-    print 'Hello World'
 
-    base_url = "http://www.google.com"
+    base_url = "localhost"
     portno = 8081
 
     params = {}

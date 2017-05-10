@@ -3,7 +3,7 @@ import requests
 
 def main():
 
-    base_url = "http://localhost:8081"
+    base_url = "ws://localhost:8081"
     portno = 8081
 
     params = {}

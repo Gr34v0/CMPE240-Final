@@ -1,15 +1,8 @@
 var samples, data, width, height, margin, w, h, xScale, yScale, svg, xAxis, yAxis, line, g, path;
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'cmpe240',
-    database: 'cmpe'
-});
 
 samples = Math.PI * 3;
 //data = generateSineData(samples);
-data = JSON.parse(getAllDB());
+data = db;
 width = 800;
 height = 500;
 margin = {
@@ -43,16 +36,4 @@ function generateSineData(samples){
   return d3.range(0, 100).map(function(i){
     return Math.sin(i);
   });
-}
-function getAllDB(){
-    connection.query("SELECT * FROM data", function (err, rows, fields) {
-        if (!err) {
-		rows = JSON.stringify(rows);
-		console.log(rows);
-		return rows;
-        }
-        else {
-            console.log('Error while performing Query.');
-        }
-    });
 }

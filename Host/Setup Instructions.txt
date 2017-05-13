@@ -2,9 +2,14 @@ Guides this information was taken from:
 http://www.instructables.com/id/Turning-your-Raspberry-Pi-into-a-personal-web-serv/
 http://www.instructables.com/id/Host-your-website-on-Raspberry-pi/
 https://pimylifeup.com/raspberry-pi-mysql-phpmyadmin/
+http://thisdavej.com/beginners-guide-to-installing-node-js-on-a-raspberry-pi/
 
 This guide assumes that the Raspberry Pi has Raspbian installed on it already.
-The first step is to install the apache server. This is done by using the following command.
+The first step is to install the Node.js server. We do this by running "curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -"
+This allows us to get the Node packages.
+Then run "sudo apt install nodejs"
+
+The next step is to install the apache server. We are doing this in order to use PHPMyAdmin in order to interact with the database. This is done by using the following command.
 "sudo apt-get install apache2 php5 libapache2-mod-php5"
 Then you need to allow for overrides by changing "AllowOverride None" to "AllowOverride ALL" in the file located at "sudo nano /etc/apache2/sites-enabled/000-default".
 Restart the server. "sudo service apache2 restart"
